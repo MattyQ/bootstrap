@@ -57,6 +57,18 @@ $(function () {
     var $trigger = $('<a href="#" rel="tooltip" title="Another tooltip"/>').bootstrapTooltip()
     assert.strictEqual($trigger.attr('title'), '', 'title attribute was emptied')
   })
+  
+  QUnit.test('should add aria-label attribute for referencing original title', function (assert) {
+    assert.expect(1)
+    var $trigger = $('<a href="#" rel="tooltip" title="Another tooltip"/>').bootstrapTooltip()
+    assert.strictEqual($trigger.attr('aria-label'), 'Another tooltip', 'original title preserved in aria-label attribute')
+  })
+  
+  QUnit.test('aria-label attribute not added if the attribute already exists', function (assert) {
+    assert.expect(1)
+    var $trigger = $('<a href="#" rel="tooltip" aria-label="Different label" title="Another tooltip"/>').bootstrapTooltip()
+    assert.strictEqual($trigger.attr('aria-label'), 'Different label', 'original aria-label preserved')
+  })
 
   QUnit.test('should add data attribute for referencing original title', function (assert) {
     assert.expect(1)
